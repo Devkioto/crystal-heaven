@@ -28,6 +28,11 @@ import DetailsBar from "../components/DetailsBar";
 import styles from "../styles/RoomDetailsPage.module.css";
 import placeholderSvg from "../assets/placeholder.svg";
 
+// --- image imports (use the same as in roomsCataloguePage.jsx) ---
+import seaImg from "../assets/images/sea.jpg";
+import hotelPoolImg from "../assets/images/hotel-pool.jpg";
+import architectureImg from "../assets/images/architecture.jpg";
+
 export default function RoomDetailsPage() {
   const { id } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -38,12 +43,7 @@ export default function RoomDetailsPage() {
     "1": {
       id: 1,
       name: "Ocean View Suite",
-      images: [
-        require("../assets/images/sea.jpg"),
-        require("../assets/images/hotel-pool.jpg"),
-        require("../assets/images/architecture.jpg"),
-        require("../assets/images/sea.jpg"),
-      ],
+      images: [seaImg, hotelPoolImg, architectureImg, seaImg],
       price: 299,
       originalPrice: 349,
       rating: 5,
@@ -104,10 +104,10 @@ export default function RoomDetailsPage() {
       id: 2,
       name: "Presidential Villa",
       images: [
-        require("../assets/images/hotel-pool.jpg"),
-        require("../assets/images/sea.jpg"),
-        require("../assets/images/architecture.jpg"),
-        require("../assets/images/hotel-pool.jpg"),
+        hotelPoolImg,
+        seaImg,
+        architectureImg,
+        hotelPoolImg,
       ],
       price: 599,
       originalPrice: 699,
@@ -169,10 +169,10 @@ export default function RoomDetailsPage() {
       id: 3,
       name: "Sky Penthouse",
       images: [
-        require("../assets/images/architecture.jpg"),
-        require("../assets/images/sea.jpg"),
-        require("../assets/images/hotel-pool.jpg"),
-        require("../assets/images/architecture.jpg"),
+        architectureImg,
+        seaImg,
+        hotelPoolImg,
+        architectureImg,
       ],
       price: 449,
       originalPrice: 529,
@@ -256,6 +256,15 @@ export default function RoomDetailsPage() {
       (prev) => (prev - 1 + room.images.length) % room.images.length
     );
   };
+
+  // Service fee and tax rate constants
+  const SERVICE_FEE = 25;
+  const TAX_RATE = 0.12;
+
+  // Calculate total price based on guests
+  const baseRate = room ? room.price * guests : 0;
+  const taxes = Math.round(baseRate * TAX_RATE);
+  const total = baseRate + SERVICE_FEE + taxes;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -549,21 +558,19 @@ export default function RoomDetailsPage() {
                 <div className={styles.priceBreakdown}>
                   <div className={styles.priceRow}>
                     <span>Base Rate</span>
-                    <span>${room.price}</span>
+                    <span>${baseRate}</span>
                   </div>
                   <div className={styles.priceRow}>
                     <span>Service Fee</span>
-                    <span>$25</span>
+                    <span>${SERVICE_FEE}</span>
                   </div>
                   <div className={styles.priceRow}>
                     <span>Taxes</span>
-                    <span>${Math.round(room.price * 0.12)}</span>
+                    <span>${taxes}</span>
                   </div>
                   <div className={`${styles.priceRow} ${styles.totalRow}`}>
                     <span>Total</span>
-                    <span>
-                      ${room.price + 25 + Math.round(room.price * 0.12)}
-                    </span>
+                    <span>${total}</span>
                   </div>
                 </div>
 
@@ -597,3 +604,4 @@ export default function RoomDetailsPage() {
     </div>
   );
 }
+
