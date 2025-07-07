@@ -14,6 +14,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import DetailsBar from "../components/DetailsBar";
 import styles from "../styles/HomePage.module.css";
 import placeholderSvg from "../../public/placeholder.svg";
@@ -21,7 +22,6 @@ import OceanViewRoom from "../assets/images/OceanViewRoom.jpg";
 import PresidentialVillaRoom from "../assets/images/PresidentialVillaRoom.jpg";
 import SkyPenthouseRoom from "../assets/images/SkyPenthouseRoom.jpg";
 import Navigation from "../components/Navigation";
-
 
 export default function HomePage() {
   const bestRooms = [
@@ -164,12 +164,18 @@ export default function HomePage() {
     },
   ];
 
+  // Booking bar state
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [rooms, setRooms] = useState(1);
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className={styles.heroSection}>
         <Navigation />
-
         {/* Welcome Section */}
         <div className={styles.welcomeSection}>
           <p className={styles.welcomeText}>Welcome to</p>
@@ -177,10 +183,102 @@ export default function HomePage() {
           <p className={styles.welcomeSubtext}>
             Our Crystal Heaven is happy for your visit!
           </p>
-          <Link to="/rooms" className={styles.bookButton}>
-            <span className={styles.bookButtonText}>Book!</span>
-            <Ticket className={`${styles.bookButtonIcon} w-5 h-5`} />
-          </Link>
+          {/* Booking Bar Start */}
+          <div className="w-full flex justify-center mt-6">
+            <form
+              className="flex items-center bg-white/90 shadow-lg rounded-full px-6 py-4 gap-6 max-w-5xl w-full relative"
+              onSubmit={(e) => {
+                e.preventDefault();
+                // You can handle the booking logic here
+                alert(
+                  `Booking: ${rooms} room(s), ${adults} adult(s), ${children} child(ren), Check-in: ${checkIn}, Check-out: ${checkOut}`
+                );
+              }}
+            >
+              <div className="flex flex-col items-start pr-4 border-r border-gray-300">
+                <span className="text-sm text-gray-500 font-medium">
+                  Rooms From
+                </span>
+                <span className="text-lg font-semibold text-gray-800">
+                  MAD 1050
+                </span>
+              </div>
+              <div className="flex items-center gap-2 pl-4 pr-4 border-r border-gray-300">
+                <span className="text-gray-700 font-medium">Check In</span>
+                <input
+                  type="date"
+                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
+                  required
+                  style={{ minWidth: 120 }}
+                />
+              </div>
+              <div className="flex items-center gap-2 pr-4 border-r border-gray-300">
+                <span className="text-gray-700 font-medium">Check Out</span>
+                <input
+                  type="date"
+                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  value={checkOut}
+                  onChange={(e) => setCheckOut(e.target.value)}
+                  required
+                  style={{ minWidth: 120 }}
+                />
+              </div>
+              <div className="flex items-center gap-2 pl-4 pr-4 border-r border-gray-300">
+                <span className="text-gray-700 font-medium">{rooms} Room</span>
+                <select
+                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none"
+                  value={rooms}
+                  onChange={(e) => setRooms(Number(e.target.value))}
+                >
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center gap-2 pr-4 border-r border-gray-300">
+                <span className="text-gray-700 font-medium">{adults} Adult</span>
+                <select
+                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none"
+                  value={adults}
+                  onChange={(e) => setAdults(Number(e.target.value))}
+                >
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center gap-2 pl-4 pr-4 border-r border-gray-300">
+                <span className="text-gray-700 font-medium">
+                  {children} Children
+                </span>
+                <select
+                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none"
+                  value={children}
+                  onChange={(e) => setChildren(Number(e.target.value))}
+                >
+                  {[0, 1, 2, 3, 4, 5].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="submit"
+                className="absolute right-0 -mr-8 bg-yellow-700 hover:bg-yellow-800 text-white font-semibold rounded-full px-8 py-4 shadow-lg text-lg transition-all duration-200"
+                style={{ minWidth: "110px" }}
+              >
+                Book Now
+              </button>
+            </form>
+          </div>
+          {/* Booking Bar End */}
         </div>
       </div>
 
