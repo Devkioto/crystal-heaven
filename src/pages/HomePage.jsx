@@ -200,7 +200,7 @@ export default function HomePage() {
                   Rooms From
                 </span>
                 <span className="text-2xl font-extrabold text-gray-800 mt-1">
-                  MAD 1050
+                  $ 105
                 </span>
               </div>
               {/* Check In */}
