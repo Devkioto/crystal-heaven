@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import DetailsBar from "../components/DetailsBar";
 import styles from "../styles/HomePage.module.css";
-import placeholderSvg from "../../public/placeholder.svg";
+import placeholderSvg from "/placeholder.svg";
 import OceanViewRoom from "../assets/images/OceanViewRoom.jpg";
 import PresidentialVillaRoom from "../assets/images/PresidentialVillaRoom.jpg";
 import SkyPenthouseRoom from "../assets/images/SkyPenthouseRoom.jpg";
@@ -186,82 +186,92 @@ export default function HomePage() {
           {/* Booking Bar Start */}
           <div className="w-full flex justify-center mt-6">
             <form
-              className="flex items-center bg-white/90 shadow-lg rounded-full px-6 py-4 gap-6 max-w-5xl w-full relative"
+              className="flex items-center bg-white/80 shadow-xl rounded-full px-10 py-6 gap-0 max-w-6xl w-full relative backdrop-blur-md border border-gray-200"
               onSubmit={(e) => {
                 e.preventDefault();
                 // You can handle the booking logic here
                 alert(
                   `Booking: ${rooms} room(s), ${adults} adult(s), ${children} child(ren), Check-in: ${checkIn}, Check-out: ${checkOut}`
                 );
-              }}
-            >
-              <div className="flex flex-col items-start pr-4 border-r border-gray-300">
-                <span className="text-sm text-gray-500 font-medium">
+              }}>
+              {/* Rooms From */}
+              <div className="flex flex-col items-start justify-center pr-8 border-r border-gray-200 min-w-[140px]">
+                <span className="text-xs text-gray-500 font-semibold tracking-wide uppercase">
                   Rooms From
                 </span>
-                <span className="text-lg font-semibold text-gray-800">
+                <span className="text-2xl font-extrabold text-gray-800 mt-1">
                   MAD 1050
                 </span>
               </div>
-              <div className="flex items-center gap-2 pl-4 pr-4 border-r border-gray-300">
-                <span className="text-gray-700 font-medium">Check In</span>
+              {/* Check In */}
+              <div className="flex flex-col justify-center items-start px-8 border-r border-gray-200 min-w-[170px]">
+                <span className="text-gray-700 font-semibold text-base mb-1">
+                  Check In
+                </span>
                 <input
                   type="date"
-                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600 bg-white text-gray-700 font-medium text-base"
                   value={checkIn}
                   onChange={(e) => setCheckIn(e.target.value)}
                   required
                   style={{ minWidth: 120 }}
                 />
               </div>
-              <div className="flex items-center gap-2 pr-4 border-r border-gray-300">
-                <span className="text-gray-700 font-medium">Check Out</span>
+              {/* Check Out */}
+              <div className="flex flex-col justify-center items-start px-8 border-r border-gray-200 min-w-[170px]">
+                <span className="text-gray-700 font-semibold text-base mb-1">
+                  Check Out
+                </span>
                 <input
                   type="date"
-                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600"
+                  className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-600 bg-white text-gray-700 font-medium text-base"
                   value={checkOut}
                   onChange={(e) => setCheckOut(e.target.value)}
                   required
                   style={{ minWidth: 120 }}
                 />
               </div>
-              <div className="flex items-center gap-2 pl-4 pr-4 border-r border-gray-300">
-                <span className="text-gray-700 font-medium">{rooms} Room</span>
-                <select
-                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none"
-                  value={rooms}
-                  onChange={(e) => setRooms(Number(e.target.value))}
-                >
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <option key={n} value={n}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex items-center gap-2 pr-4 border-r border-gray-300">
-                <span className="text-gray-700 font-medium">{adults} Adult</span>
-                <select
-                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none"
-                  value={adults}
-                  onChange={(e) => setAdults(Number(e.target.value))}
-                >
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <option key={n} value={n}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex items-center gap-2 pl-4 pr-4 border-r border-gray-300">
-                <span className="text-gray-700 font-medium">
-                  {children} Children
+              {/* Rooms */}
+              <div className="flex flex-col justify-center items-start px-8 border-r border-gray-200 min-w-[120px]">
+                <span className="text-gray-700 font-semibold text-base mb-1">
+                  Room
                 </span>
                 <select
-                  className="ml-2 px-2 py-1 rounded border border-gray-300 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none bg-white"
+                  value={rooms}
+                  onChange={(e) => setRooms(Number(e.target.value))}>
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* Adults */}
+              <div className="flex flex-col justify-center items-start px-8 border-r border-gray-200 min-w-[120px]">
+                <span className="text-gray-700 font-semibold text-base mb-1">
+                  Adult
+                </span>
+                <select
+                  className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none bg-white"
+                  value={adults}
+                  onChange={(e) => setAdults(Number(e.target.value))}>
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* Children */}
+              <div className="flex flex-col justify-center items-start px-8 min-w-[120px]">
+                <span className="text-gray-700 font-semibold text-base mb-1">
+                  Children
+                </span>
+                <select
+                  className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none bg-white"
                   value={children}
-                  onChange={(e) => setChildren(Number(e.target.value))}
-                >
+                  onChange={(e) => setChildren(Number(e.target.value))}>
                   {[0, 1, 2, 3, 4, 5].map((n) => (
                     <option key={n} value={n}>
                       {n}
@@ -269,12 +279,17 @@ export default function HomePage() {
                   ))}
                 </select>
               </div>
+              {/* Book Now Button */}
               <button
                 type="submit"
-                className="absolute right-0 -mr-8 bg-yellow-700 hover:bg-yellow-800 text-white font-semibold rounded-full px-8 py-4 shadow-lg text-lg transition-all duration-200"
-                style={{ minWidth: "110px" }}
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-900 hover:bg-blue-950 text-white font-bold rounded-full w-16 h-16 flex items-center justify-center shadow-lg text-base transition-all duration-200"
+                style={{ minWidth: "0", minHeight: "0", padding: 0 }}
+                title="Book Now"
               >
-                Book Now
+                <span className="sr-only">Book Now</span>
+                <svg width="28" height="28" fill="none" viewBox="0 0 24 24" className="inline-block">
+                  <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
             </form>
           </div>

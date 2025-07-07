@@ -58,6 +58,7 @@ export default function Navigation() {
   useEffect(() => {
     if (!showNavbar && !isHovering) return;
     let timeout;
+    // Only auto-hide if not at the top of the page
     if (showNavbar && !isHovering && window.scrollY > 0) {
       timeout = setTimeout(() => setShowNavbar(false), 2000);
     }
@@ -90,7 +91,7 @@ export default function Navigation() {
                   className={`relative font-light px-5 py-2 transition-all duration-300
                     ${
                       isActive(item.path)
-                        ? "lux-active-nav"
+                        ? "text-cyan-400 font-semibold"
                         : "text-cyan-50 hover:bg-cyan-100/10 hover:text-cyan-200"
                     }`}
                   style={
@@ -99,13 +100,14 @@ export default function Navigation() {
                           background: "transparent",
                           border: "none",
                           boxShadow: "none",
-                          color: "#fff",
+                          color: "#22d3ee", // cyan-400
                           fontWeight: 600,
                           letterSpacing: "0.04em",
-                          borderBottom: "2.5px solid #67e8f9",
+                          borderBottom: "2.5px solid #22d3ee",
                           borderRadius: "0",
+                          paddingBottom: "6px",
                         }
-                      : { borderRadius: "0" }
+                      : { borderRadius: "0", paddingBottom: "6px" }
                   }>
                   <span className="relative z-10">{item.name}</span>
                   {/* Progress underline on hover or active */}
