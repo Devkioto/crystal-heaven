@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export default function DetailsBar() {
   const detailItems = [
-    { icon: Map, title: "maps", href: "/contact" },
+    { icon: Map, title: "maps", href: "/our-maps" },
     { icon: UserPlus, title: "register", href: "/account" },
     { icon: Phone, title: "contact us", href: "/contact" },
   ]

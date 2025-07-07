@@ -28,7 +28,7 @@ export default function Navigation() {
 
   return (
     <>
-      <div className="h-20 bg-black/30 backdrop-blur-xl border-b border-cyan-200/20 shadow-lg shadow-cyan-100/20 flex items-center justify-between px-4 md:px-12 relative z-50">
+      <div className="w-full h-20 bg-black/30 backdrop-blur-xl border-b border-cyan-200/20 shadow-lg shadow-cyan-100/20 flex items-center justify-between px-4 md:px-12 relative z-50">
         {/* Logo */}
         <Link
           to="/"

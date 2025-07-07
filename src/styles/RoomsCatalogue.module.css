@@ -6,7 +6,6 @@
   min-height: 60vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   color: white;
   text-align: center;
@@ -76,8 +75,13 @@
   transition: all 0.3s ease;
 }
 
-.categoryButton:hover,
-.categoryButton:first-child {
+.activeCategory {
+  background: #1e3a8a; /* dark blue */
+  color: #fff;
+  border-color: #1e3a8a;
+}
+
+.categoryButton:hover {
   background: #1e293b;
   color: white;
   border-color: #1e293b;

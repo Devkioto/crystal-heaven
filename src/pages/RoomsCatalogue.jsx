@@ -21,8 +21,12 @@ import SkyPenthouseRoom from "../assets/images/SkyPenthouseRoom.jpg";
 import room4 from "../assets/images/room4.jpg"; 
 import room5 from "../assets/images/room5.jpg";
 import room6 from "../assets/images/room6.jpg";
+import { useState } from "react";
 
 export default function RoomsCatalogue() {
+  // Add state for selected category
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   const allRooms = [
     {
       id: 1,
@@ -204,6 +208,12 @@ export default function RoomsCatalogue() {
     "Family",
   ];
 
+  // Filter rooms based on selected category
+  const filteredRooms =
+    selectedCategory === "All"
+      ? allRooms
+      : allRooms.filter((room) => room.category === selectedCategory);
+
   return (
     <div className="min-h-screen">
       {/* Header Section */}
@@ -228,7 +238,15 @@ export default function RoomsCatalogue() {
           </div>
           <div className={styles.categoryFilters}>
             {categories.map((category) => (
-              <button key={category} className={styles.categoryButton}>
+              <button
+                key={category}
+                className={`${styles.categoryButton} ${
+                  selectedCategory === category ? styles.activeCategory : ""
+                }`}
+                onClick={() => setSelectedCategory(category)}
+                // Add aria-pressed for accessibility
+                aria-pressed={selectedCategory === category}
+              >
                 {category}
               </button>
             ))}
@@ -240,7 +258,7 @@ export default function RoomsCatalogue() {
       <section className={styles.roomsSection}>
         <div className={styles.sectionContainer}>
           <div className={styles.roomsGrid}>
-            {allRooms.map((room) => (
+            {filteredRooms.map((room) => (
               <div key={room.id} className={styles.roomCard}>
                 <div className={styles.roomImageContainer}>
                   <img
