@@ -1,0 +1,476 @@
+.heroSection {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../assets/images/hotel-pool.jpg") center center
+    no-repeat;
+  background-blend-mode: darken;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.welcomeSection {
+  background-color: transparent;
+  position: relative;
+  top: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, sans-serif;
+  font-size: 20px;
+  text-align: center;
+  gap: 1rem;
+}
+
+.welcomeText {
+  color: rgb(255, 255, 255);
+  background: transparent;
+  letter-spacing: 0.5rem;
+  line-height: 2rem;
+  width: 75%;
+  margin-bottom: 0.5rem;
+}
+
+.hotelName {
+  font-family: system-ui, sans-serif;
+  font-size: 45px;
+  color: rgb(212, 242, 251);
+  text-shadow: 0px 0px 15px rgba(0, 255, 217, 0.9);
+  word-spacing: 0.7rem;
+  margin: 1rem 0;
+}
+
+.welcomeSubtext {
+  color: rgb(255, 255, 255);
+  background: transparent;
+  letter-spacing: 0.5rem;
+  line-height: 2rem;
+  width: 75%;
+  margin-bottom: 2rem;
+}
+
+.bookButton {
+  width: 110px;
+  height: 45px;
+  background: transparent;
+  border: 2px solid whitesmoke;
+  border-radius: 5px;
+  color: whitesmoke;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+  cursor: pointer;
+  transition-duration: 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 3rem;
+  text-decoration: none;
+}
+
+.bookButton:hover {
+  background: hsla(0, 0%, 90%, 0.439);
+  backdrop-filter: blur(20px);
+  color: black;
+  box-shadow: 0px 0px 10px black;
+  border: none;
+}
+
+.bookButton:hover .bookButtonIcon {
+  display: none;
+}
+
+.bookButtonText {
+  display: none;
+}
+
+.bookButton:hover .bookButtonText {
+  display: inline;
+}
+
+.bookButtonIcon {
+  animation: bounce 2s infinite;
+}
+
+/* Best Rooms Section */
+.bestRoomsSection {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 80px 0;
+  min-height: 100vh;
+}
+
+.sectionContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.sectionSubtitle {
+  font-size: 18px;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.roomsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.roomCard {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.roomCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.roomImageContainer {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.roomImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.roomCard:hover .roomImage {
+  transform: scale(1.05);
+}
+
+.roomPrice {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.roomPrice span {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.roomContent {
+  padding: 24px;
+}
+
+.roomHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.roomName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.roomRating {
+  display: flex;
+  gap: 2px;
+}
+
+.roomDescription {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.roomDetails {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.roomInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.roomAmenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.amenityTag {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.bookRoomButton {
+  width: 100%;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.bookRoomButton:hover {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+}
+
+/* Services Section */
+.servicesSection {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%);
+  padding: 100px 0;
+  color: white;
+}
+
+.servicesSection .sectionTitle {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.servicesSection .sectionSubtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.serviceCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.serviceCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.serviceCard:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: #22543d;
+}
+
+.serviceIcon {
+  width: 70px;
+  height: 70px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.serviceContent {
+  flex: 1;
+}
+
+.serviceTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.serviceDescription {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.serviceFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.serviceFeature {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.featureDot {
+  width: 6px;
+  height: 6px;
+  background: #22543d;
+  border-radius: 50%;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.servicesCallToAction {
+  text-align: center;
+  margin-top: 80px;
+  padding: 60px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ctaTitle {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.ctaDescription {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  background: #22543d;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(34, 84, 61, 0.3);
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(34, 84, 61, 0.4);
+  background: #1a3d2e;
+}
+
+@media (max-width: 768px) {
+  .welcomeSection {
+    padding: 0 5%;
+    gap: 0.5rem;
+  }
+
+  .hotelName {
+    font-size: 35px;
+  }
+
+  .welcomeText,
+  .welcomeSubtext {
+    font-size: 18px;
+    width: 90%;
+    letter-spacing: 0.3rem;
+  }
+
+  .bookButton {
+    width: 120px;
+    height: 50px;
+    margin-top: 2rem;
+  }
+
+  .bestRoomsSection {
+    padding: 60px 0;
+  }
+
+  .sectionTitle {
+    font-size: 36px;
+  }
+
+  .roomsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .sectionContainer {
+    padding: 0 16px;
+  }
+
+  .servicesSection {
+    padding: 60px 0;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .serviceCard {
+    padding: 24px;
+  }
+
+  .ctaTitle {
+    font-size: 28px;
+  }
+
+  .servicesCallToAction {
+    padding: 40px 20px;
+    margin-top: 60px;
+  }
+}

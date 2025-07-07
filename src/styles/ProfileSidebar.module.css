@@ -1,0 +1,687 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.sidebarTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.sidebarContent {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Authentication Section */
+.authSection {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  justify-content: center;
+}
+
+.authHeader {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.authTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.authSubtitle {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.authButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.authButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.authButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.googleButton {
+  background: white;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.googleButton:hover:not(:disabled) {
+  border-color: #4285f4;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
+}
+
+.appleButton {
+  background: #000;
+  color: white;
+}
+
+.appleButton:hover:not(:disabled) {
+  background: #1a1a1a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.authIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.authDivider {
+  position: relative;
+  text-align: center;
+  margin: 8px 0;
+}
+
+.authDivider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.authDivider span {
+  background: white;
+  padding: 0 16px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.guestSection {
+  text-align: center;
+}
+
+.guestText {
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.guestButton {
+  background: transparent;
+  color: #22543d;
+  border: 2px solid #22543d;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.guestButton:hover {
+  background: #22543d;
+  color: white;
+}
+
+.authFooter {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.termsText {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.termsLink {
+  color: #22543d;
+  text-decoration: none;
+}
+
+.termsLink:hover {
+  text-decoration: underline;
+}
+
+/* Authenticated User Section */
+.sidebarNav {
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.navItem.active {
+  background: #22543d;
+  color: white;
+}
+
+.contentArea {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.tabContent {
+  padding: 24px;
+}
+
+.tabTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+/* Profile Content */
+.profileHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.avatarContainer {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e2e8f0;
+}
+
+.avatarEdit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #22543d;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.userName {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.userEmail {
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.memberSince {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.profileStats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 24px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statNumber {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: #22543d;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profileActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actionButton {
+  background: transparent;
+  color: #22543d;
+  border: 2px solid #22543d;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.actionButton:hover {
+  background: #22543d;
+  color: white;
+}
+
+/* Bookings */
+.bookingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bookingCard {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.bookingImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bookingImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bookingInfo h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.bookingInfo p {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.bookingStatus {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 600;
+}
+
+/* Favorites */
+.favoritesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.favoriteCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.favoriteCard img {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.favoriteInfo {
+  flex: 1;
+}
+
+.favoriteInfo h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.favoriteInfo p {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.removeButton:hover {
+  background: #fef2f2;
+}
+
+/* Payment Methods */
+.paymentMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.paymentCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.cardIcon {
+  font-size: 24px;
+}
+
+.cardInfo {
+  flex: 1;
+}
+
+.cardInfo h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.cardInfo p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.cardAction {
+  background: none;
+  border: none;
+  color: #22543d;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addPaymentButton {
+  background: transparent;
+  color: #22543d;
+  border: 2px dashed #22543d;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.addPaymentButton:hover {
+  background: #f0fdf4;
+}
+
+/* Notifications */
+.notificationSettings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notificationItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.notificationItem:last-child {
+  border-bottom: none;
+}
+
+.notificationItem h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.notificationItem p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* Settings */
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settingItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settingItem h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.settingSelect {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+}
+
+/* Privacy */
+.privacySettings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.privacyItem {
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.privacyItem h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.privacyItem p {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.enableButton,
+.viewButton,
+.downloadButton {
+  background: #22543d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.enableButton:hover,
+.viewButton:hover,
+.downloadButton:hover {
+  background: #1a3d2e;
+}
+
+/* Footer */
+.sidebarFooter {
+  padding: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.signOutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signOutButton:hover {
+  background: #dc2626;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100vw;
+    right: -100vw;
+  }
+
+  .sidebar.open {
+    right: 0;
+  }
+
+  .authSection {
+    padding: 24px 20px;
+  }
+
+  .profileStats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .statItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .statNumber {
+    font-size: 20px;
+  }
+}

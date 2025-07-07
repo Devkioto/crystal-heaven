@@ -1,0 +1,214 @@
+.heroSection {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/images/hotel-pool.jpg") center center
+    no-repeat;
+  background-blend-mode: darken;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.ownerSection {
+  position: absolute;
+  background: linear-gradient(0deg, rgb(5, 38, 47), transparent);
+  height: 95vh;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  color: aliceblue;
+  z-index: 0;
+}
+
+.ownerContent {
+  padding: 0px 10%;
+  max-width: 60%;
+}
+
+.ownerTitle {
+  font-size: 46px;
+  font-weight: 500;
+  font-family: "Impact", "Arial Black", sans-serif;
+}
+
+.ownerSubtitle {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgb(21, 212, 255);
+}
+
+.ownerDescription {
+  font-size: 16px;
+  margin: 10px 0px;
+  font-family: "Georgia", "Times New Roman", serif;
+  max-height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ownerDescription::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(180deg, transparent, transparent, rgb(37, 1, 32));
+  position: absolute;
+  z-index: 1;
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 320px;
+  height: 45px;
+}
+
+.buttonSecondary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 100%;
+  background-color: transparent;
+  border: 2px solid rgb(220, 249, 249);
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(220, 249, 249);
+  letter-spacing: 1px;
+  font-family: "Consolas", "Monaco", monospace;
+  text-decoration: none;
+  transition: all 1s;
+}
+
+.buttonPrimary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 100%;
+  background-color: rgb(1, 59, 62);
+  border: 2px solid rgba(1, 59, 62);
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgb(220, 249, 249);
+  letter-spacing: 1px;
+  font-family: "Consolas", "Monaco", monospace;
+  text-decoration: none;
+  transition: all 1s;
+}
+
+.buttonSecondary:hover {
+  background-color: rgb(1, 59, 62);
+  border: 2px solid rgba(1, 59, 62);
+}
+
+.buttonSecondary:hover ~ .buttonPrimary {
+  background-color: transparent;
+  border: 2px solid rgb(220, 249, 249);
+}
+
+.meetUsSection {
+  background: url("/images/architecture.jpg") center center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.meetUsSection::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(180deg, rgb(19, 66, 71), transparent);
+  pointer-events: none;
+}
+
+.meetUsTitle {
+  background-color: aliceblue;
+  height: fit-content;
+  width: 100%;
+  padding: 20px 0px;
+  text-align: center;
+  font-weight: 500;
+  position: relative;
+  z-index: 10;
+  font-family: "system-ui", sans-serif;
+}
+
+.contentContainer {
+  position: absolute;
+  top: 40%;
+  height: 40%;
+  width: 60%;
+  display: flex;
+  z-index: 10;
+}
+
+.historySection {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.9), rgba(255, 152, 0, 0.9));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.membersSection {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.9), rgba(3, 169, 244, 0.9));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .ownerContent {
+    min-width: 100%;
+    padding: 0 5%;
+  }
+
+  .ownerTitle {
+    font-size: 30px;
+  }
+
+  .ownerSubtitle {
+    font-size: 20px;
+  }
+
+  .buttonBox {
+    width: 280px;
+    flex-direction: column;
+    height: 100px;
+    gap: 10px;
+  }
+
+  .buttonSecondary,
+  .buttonPrimary {
+    width: 100%;
+  }
+
+  .contentContainer {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  .historySection,
+  .membersSection {
+    width: 100%;
+    height: 50%;
+  }
+}

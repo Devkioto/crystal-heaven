@@ -1,0 +1,379 @@
+.headerSection {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/images/hotel-pool.jpg") center center
+    no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.headerContent {
+  margin-top: 80px;
+}
+
+.pageTitle {
+  font-size: 56px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+}
+
+.pageSubtitle {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3rem;
+}
+
+.filtersSection {
+  background: #f8fafc;
+  padding: 60px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sectionContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.filtersHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.filtersTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.filtersSubtitle {
+  font-size: 16px;
+  color: #64748b;
+}
+
+.categoryFilters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.categoryButton {
+  background: white;
+  border: 2px solid #e2e8f0;
+  color: #64748b;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.categoryButton:hover,
+.categoryButton:first-child {
+  background: #1e293b;
+  color: white;
+  border-color: #1e293b;
+}
+
+.roomsSection {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 80px 0;
+  min-height: 100vh;
+}
+
+.roomsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.roomCard {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.roomCard:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.roomImageContainer {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.roomImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.roomCard:hover .roomImage {
+  transform: scale(1.05);
+}
+
+.roomCategory {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #22543d;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.roomAvailability {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e293b;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.availabilityDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.available {
+  background: #22c55e;
+}
+
+.limited {
+  background: #f59e0b;
+}
+
+.roomContent {
+  padding: 30px;
+}
+
+.roomHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.roomName {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.roomRating {
+  display: flex;
+  gap: 2px;
+}
+
+.roomPricing {
+  text-align: right;
+}
+
+.originalPrice {
+  font-size: 14px;
+  color: #94a3b8;
+  text-decoration: line-through;
+  display: block;
+}
+
+.currentPrice {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.perNight {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.roomDescription {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.roomSpecs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.roomSpec {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.roomSize {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.roomFeatures {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.roomFeature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #475569;
+  font-size: 13px;
+}
+
+.roomAmenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.amenityTag {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.moreAmenities {
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.roomActions {
+  display: flex;
+  gap: 12px;
+}
+
+.viewDetailsButton {
+  flex: 1;
+  background: transparent;
+  border: 2px solid #1e293b;
+  color: #1e293b;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+}
+
+.viewDetailsButton:hover {
+  background: #1e293b;
+  color: white;
+}
+
+.bookNowButton {
+  flex: 1;
+  background: #22543d;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+}
+
+.bookNowButton:hover {
+  background: #1a3d2e;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(34, 84, 61, 0.3);
+}
+
+@media (max-width: 768px) {
+  .pageTitle {
+    font-size: 36px;
+  }
+
+  .pageSubtitle {
+    font-size: 16px;
+    letter-spacing: 0.2rem;
+  }
+
+  .roomsGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .roomCard {
+    margin: 0 10px;
+  }
+
+  .roomHeader {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .roomPricing {
+    text-align: left;
+  }
+
+  .roomSpecs {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .roomFeatures {
+    grid-template-columns: 1fr;
+  }
+
+  .categoryFilters {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .categoryButton {
+    white-space: nowrap;
+  }
+}
