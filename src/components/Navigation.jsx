@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { User, Menu, X } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
@@ -9,6 +9,10 @@ import ProfileSidebar from "./ProfileSidebar";
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
+  const lastScrollY = useRef(window.scrollY);
+  const ticking = useRef(false);
   const location = useLocation();
   const { user } = useAuth();
 
@@ -26,9 +30,49 @@ export default function Navigation() {
     return false;
   };
 
+  // Scroll hide/show logic
+  useEffect(() => {
+    const handleScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      window.requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        if (isHovering) {
+          setShowNavbar(true);
+        } else if (currentScrollY <= 0) {
+          setShowNavbar(true); // Always show at top
+        } else if (currentScrollY > lastScrollY.current) {
+          setShowNavbar(false); // scroll down
+        } else if (currentScrollY < lastScrollY.current) {
+          setShowNavbar(true); // scroll up
+        }
+        lastScrollY.current = currentScrollY;
+        ticking.current = false;
+      });
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHovering]);
+
+  // Hide navbar if not moving and not hovering, but not at top
+  useEffect(() => {
+    if (!showNavbar && !isHovering) return;
+    let timeout;
+    if (showNavbar && !isHovering && window.scrollY > 0) {
+      timeout = setTimeout(() => setShowNavbar(false), 2000);
+    }
+    return () => clearTimeout(timeout);
+  }, [showNavbar, isHovering]);
+
   return (
     <>
-      <div className="w-full h-20 bg-black/30 backdrop-blur-xl border-b border-cyan-200/20 shadow-lg shadow-cyan-100/20 flex items-center justify-between px-4 md:px-12 relative z-50">
+      <div
+        className={`w-full h-20 bg-black/30 backdrop-blur-xl border-b border-cyan-200/20 shadow-lg shadow-cyan-100/20 flex items-center justify-between px-4 md:px-12 relative z-50 transition-transform duration-500 ${
+          showNavbar ? "translate-y-0" : "-translate-y-full"
+        }`}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        style={{ top: 0, position: "fixed" }}>
         {/* Logo */}
         <Link
           to="/"
@@ -43,14 +87,36 @@ export default function Navigation() {
               <li key={item.name} className="flex flex-col group">
                 <Link
                   to={item.path}
-                  className={`text-cyan-50 font-light transition-all duration-700 hover:text-shadow-cyan ${
+                  className={`relative font-light px-5 py-2 transition-all duration-300
+                    ${
+                      isActive(item.path)
+                        ? "lux-active-nav"
+                        : "text-cyan-50 hover:bg-cyan-100/10 hover:text-cyan-200"
+                    }`}
+                  style={
                     isActive(item.path)
-                      ? "bg-white/10 px-4 py-2 border-l border-r border-cyan-200/30 shadow-lg shadow-red-200/20"
-                      : ""
-                  }`}>
-                  {item.name}
+                      ? {
+                          background: "transparent",
+                          border: "none",
+                          boxShadow: "none",
+                          color: "#fff",
+                          fontWeight: 600,
+                          letterSpacing: "0.04em",
+                          borderBottom: "2.5px solid #67e8f9",
+                          borderRadius: "0",
+                        }
+                      : { borderRadius: "0" }
+                  }>
+                  <span className="relative z-10">{item.name}</span>
+                  {/* Progress underline on hover or active */}
+                  <span
+                    className={`
+          absolute left-0 -bottom-0.5 h-0.5 bg-cyan-300 transition-all duration-500
+          ${isActive(item.path) ? "w-full" : "w-0 group-hover:w-full"}
+        `}
+                    style={{ borderRadius: "2px" }}
+                  ></span>
                 </Link>
-                <span className="mt-1 bg-cyan-200 h-0.5 w-0 group-hover:w-full transition-all duration-1000"></span>
               </li>
             ))}
             <li className="flex flex-col group">
@@ -73,7 +139,6 @@ export default function Navigation() {
                   </span>
                 )}
               </button>
-              <span className="mt-1 bg-cyan-200 h-0.5 w-0 group-hover:w-full transition-all duration-1000"></span>
             </li>
           </ul>
         </nav>
@@ -98,7 +163,9 @@ export default function Navigation() {
                   <Link
                     to={item.path}
                     className={`block px-6 py-3 text-cyan-50 hover:bg-white/10 transition-colors ${
-                      isActive(item.path) ? "bg-white/10" : ""
+                      isActive(item.path)
+                        ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-semibold"
+                        : ""
                     }`}
                     onClick={() => setIsMenuOpen(false)}>
                     {item.name}
@@ -129,5 +196,3 @@ export default function Navigation() {
     </>
   );
 }
-
-
