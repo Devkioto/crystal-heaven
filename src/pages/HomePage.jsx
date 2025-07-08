@@ -13,7 +13,7 @@ import {
   Shield,
   MapPin,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import DetailsBar from "../components/DetailsBar";
 import styles from "../styles/HomePage.module.css";
@@ -171,6 +171,8 @@ export default function HomePage() {
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -189,9 +191,9 @@ export default function HomePage() {
               className="flex items-center bg-white/80 shadow-xl rounded-full px-10 py-6 gap-0 max-w-6xl w-full relative backdrop-blur-md border border-gray-200"
               onSubmit={(e) => {
                 e.preventDefault();
-                // You can handle the booking logic here
-                alert(
-                  `Booking: ${rooms} room(s), ${adults} adult(s), ${children} child(ren), Check-in: ${checkIn}, Check-out: ${checkOut}`
+                // Navigate to /rooms with search params
+                navigate(
+                  `/rooms?rooms=${rooms}&adults=${adults}&children=${children}&checkIn=${checkIn}&checkOut=${checkOut}`
                 );
               }}>
               {/* Rooms From */}
@@ -282,14 +284,11 @@ export default function HomePage() {
               {/* Book Now Button */}
               <button
                 type="submit"
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-900 hover:bg-blue-950 text-white font-bold rounded-full w-16 h-16 flex items-center justify-center shadow-lg text-base transition-all duration-200"
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-900 hover:bg-blue-950 text-white font-bold rounded-full w-20 h-20 flex items-center justify-center shadow-lg text-lg transition-all duration-200"
                 style={{ minWidth: "0", minHeight: "0", padding: 0 }}
-                title="Book Now"
-              >
+                title="Book Now">
                 <span className="sr-only">Book Now</span>
-                <svg width="28" height="28" fill="none" viewBox="0 0 24 24" className="inline-block">
-                  <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                Book
               </button>
             </form>
           </div>
@@ -359,7 +358,12 @@ export default function HomePage() {
                     ))}
                   </div>
 
-                  <Link to="/rooms" className={styles.bookRoomButton}>
+                  <Link
+                    to="/rooms"
+                    className={
+                      styles.bookRoomButton +
+                      " bg-green-700 hover:bg-green-800 text-white border-none"
+                    }>
                     Book Now
                   </Link>
                 </div>

@@ -10,7 +10,7 @@ import {
   Tv,
   Wind,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navigation from "../components/Navigation";
 import DetailsBar from "../components/DetailsBar";
 import styles from "../styles/RoomsCatalogue.module.css";
@@ -18,7 +18,7 @@ import placeholderSvg from "../assets/placeholder.svg";
 import OceanViewRoom from "../assets/images/OceanViewRoom.jpg";
 import PresidentialVillaRoom from "../assets/images/PresidentialVillaRoom.jpg";
 import SkyPenthouseRoom from "../assets/images/SkyPenthouseRoom.jpg";
-import room4 from "../assets/images/room4.jpg"; 
+import room4 from "../assets/images/room4.jpg";
 import room5 from "../assets/images/room5.jpg";
 import room6 from "../assets/images/room6.jpg";
 import { useState } from "react";
@@ -214,6 +214,25 @@ export default function RoomsCatalogue() {
       ? allRooms
       : allRooms.filter((room) => room.category === selectedCategory);
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const filterRooms = searchParams.get("rooms");
+  const filterAdults = searchParams.get("adults");
+  const filterChildren = searchParams.get("children");
+  const filterCheckIn = searchParams.get("checkIn");
+  const filterCheckOut = searchParams.get("checkOut");
+
+  let finalFilteredRooms = filteredRooms;
+  if (filterRooms || filterAdults || filterChildren) {
+    finalFilteredRooms = filteredRooms.filter((room) => {
+      let match = true;
+      if (filterRooms && Number(filterRooms) > room.guests) match = false;
+      if (filterAdults && Number(filterAdults) > room.guests) match = false;
+      // Optionally, you can add more logic for children, checkIn, checkOut
+      return match;
+    });
+  }
+
   return (
     <div className="min-h-screen">
       {/* Header Section */}
@@ -245,8 +264,7 @@ export default function RoomsCatalogue() {
                 }`}
                 onClick={() => setSelectedCategory(category)}
                 // Add aria-pressed for accessibility
-                aria-pressed={selectedCategory === category}
-              >
+                aria-pressed={selectedCategory === category}>
                 {category}
               </button>
             ))}
@@ -258,103 +276,118 @@ export default function RoomsCatalogue() {
       <section className={styles.roomsSection}>
         <div className={styles.sectionContainer}>
           <div className={styles.roomsGrid}>
-            {filteredRooms.map((room) => (
-              <div key={room.id} className={styles.roomCard}>
-                <div className={styles.roomImageContainer}>
-                  <img
-                    src={room.image || placeholderSvg}
-                    alt={room.name}
-                    className={styles.roomImage}
-                  />
-                  <div className={styles.roomCategory}>{room.category}</div>
-                  <div className={styles.roomAvailability}>
-                    <span
-                      className={`${styles.availabilityDot} ${
-                        room.availability === "Limited"
-                          ? styles.limited
-                          : styles.available
-                      }`}></span>
-                    {room.availability}
-                  </div>
-                </div>
-
-                <div className={styles.roomContent}>
-                  <div className={styles.roomHeader}>
-                    <div>
-                      <h3 className={styles.roomName}>{room.name}</h3>
-                      <div className={styles.roomRating}>
-                        {[...Array(room.rating)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <div className={styles.roomPricing}>
-                      <span className={styles.originalPrice}>
-                        {room.originalPrice}
-                      </span>
-                      <span className={styles.currentPrice}>{room.price}</span>
-                      <span className={styles.perNight}>/night</span>
-                    </div>
-                  </div>
-
-                  <p className={styles.roomDescription}>{room.description}</p>
-
-                  <div className={styles.roomSpecs}>
-                    <div className={styles.roomSpec}>
-                      <Users className="w-4 h-4" />
-                      <span>{room.guests} Guests</span>
-                    </div>
-                    <div className={styles.roomSpec}>
-                      <Bed className="w-4 h-4" />
-                      <span>
-                        {room.beds} Bed{room.beds > 1 ? "s" : ""}
-                      </span>
-                    </div>
-                    <div className={styles.roomSpec}>
-                      <span className={styles.roomSize}>{room.size}</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.roomFeatures}>
-                    {room.features.map((feature, index) => (
-                      <div key={index} className={styles.roomFeature}>
-                        <feature.icon className="w-4 h-4" />
-                        <span>{feature.text}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className={styles.roomAmenities}>
-                    {room.amenities.slice(0, 3).map((amenity, index) => (
-                      <span key={index} className={styles.amenityTag}>
-                        {amenity}
-                      </span>
-                    ))}
-                    {room.amenities.length > 3 && (
-                      <span className={styles.moreAmenities}>
-                        +{room.amenities.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  <div className={styles.roomActions}>
-                    <Link
-                      to={`/rooms/${room.id}`}
-                      className={styles.viewDetailsButton}>
-                      View Details
-                    </Link>
-                    <Link
-                      to={`/rooms/${room.id}`}
-                      className={styles.bookNowButton}>
-                      Book Now
-                    </Link>
-                  </div>
-                </div>
+            {finalFilteredRooms.length === 0 ? (
+              <div
+                style={{
+                  gridColumn: "1/-1",
+                  textAlign: "center",
+                  fontSize: 24,
+                  color: "#888",
+                  padding: 40,
+                }}>
+                No room match
               </div>
-            ))}
+            ) : (
+              finalFilteredRooms.map((room) => (
+                <div key={room.id} className={styles.roomCard}>
+                  <div className={styles.roomImageContainer}>
+                    <img
+                      src={room.image || placeholderSvg}
+                      alt={room.name}
+                      className={styles.roomImage}
+                    />
+                    <div className={styles.roomCategory}>{room.category}</div>
+                    <div className={styles.roomAvailability}>
+                      <span
+                        className={`${styles.availabilityDot} ${
+                          room.availability === "Limited"
+                            ? styles.limited
+                            : styles.available
+                        }`}></span>
+                      {room.availability}
+                    </div>
+                  </div>
+
+                  <div className={styles.roomContent}>
+                    <div className={styles.roomHeader}>
+                      <div>
+                        <h3 className={styles.roomName}>{room.name}</h3>
+                        <div className={styles.roomRating}>
+                          {[...Array(room.rating)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <div className={styles.roomPricing}>
+                        <span className={styles.originalPrice}>
+                          {room.originalPrice}
+                        </span>
+                        <span className={styles.currentPrice}>
+                          {room.price}
+                        </span>
+                        <span className={styles.perNight}>/night</span>
+                      </div>
+                    </div>
+
+                    <p className={styles.roomDescription}>{room.description}</p>
+
+                    <div className={styles.roomSpecs}>
+                      <div className={styles.roomSpec}>
+                        <Users className="w-4 h-4" />
+                        <span>{room.guests} Guests</span>
+                      </div>
+                      <div className={styles.roomSpec}>
+                        <Bed className="w-4 h-4" />
+                        <span>
+                          {room.beds} Bed{room.beds > 1 ? "s" : ""}
+                        </span>
+                      </div>
+                      <div className={styles.roomSpec}>
+                        <span className={styles.roomSize}>{room.size}</span>
+                      </div>
+                    </div>
+
+                    <div className={styles.roomFeatures}>
+                      {room.features.map((feature, index) => (
+                        <div key={index} className={styles.roomFeature}>
+                          <feature.icon className="w-4 h-4" />
+                          <span>{feature.text}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className={styles.roomAmenities}>
+                      {room.amenities.slice(0, 3).map((amenity, index) => (
+                        <span key={index} className={styles.amenityTag}>
+                          {amenity}
+                        </span>
+                      ))}
+                      {room.amenities.length > 3 && (
+                        <span className={styles.moreAmenities}>
+                          +{room.amenities.length - 3} more
+                        </span>
+                      )}
+                    </div>
+
+                    <div className={styles.roomActions}>
+                      <Link
+                        to={`/rooms/${room.id}`}
+                        className={styles.viewDetailsButton}>
+                        View Details
+                      </Link>
+                      <Link
+                        to={`/rooms/${room.id}`}
+                        className={styles.bookNowButton}>
+                        Book Now
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>
